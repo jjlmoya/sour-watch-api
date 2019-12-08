@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
 const Image = require('../models/Image');
-const Barcelet = require('../models/Bracelet');
-
 const sequelize = require('../../config/database');
 
 const tableName = 'watches';

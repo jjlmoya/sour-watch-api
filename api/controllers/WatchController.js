@@ -1,5 +1,4 @@
 const Watch = require('../models/Watch');
-const Bracelet = require('../models/Bracelet');
 const authService = require('../services/auth.service');
 
 const WatchController = () => {

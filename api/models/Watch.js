@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const Image = require('../models/Image');
+const Barcelet = require('../models/Bracelet');
 
 const sequelize = require('../../config/database');
 
@@ -81,5 +83,5 @@ const Watch = sequelize.define('Watch', {
 Watch.prototype.toJSON = function () {
   return Object.assign({}, this.get());
 };
-
+Watch.hasMany(Image, { as: 'images', foreignKey: 'watchID' });
 module.exports = Watch;

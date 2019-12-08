@@ -1,5 +1,5 @@
 const Watch = require('../models/Watch');
-const Image = require('../models/Image');
+const Bracelet = require('../models/Bracelet');
 const authService = require('../services/auth.service');
 
 const WatchController = () => {
@@ -38,9 +38,11 @@ const WatchController = () => {
 
   const read = async (req, res) => {
     try {
-      Watch.hasMany(Image);
       const watches = await Watch.findAll({
-        include: [Image],
+        include: [
+          'images',
+          'bracelets',
+        ],
       });
       return res.status(200).json({ watches });
     } catch (err) {

@@ -2,11 +2,13 @@
 const Sequelize = require('sequelize');
 
 const sequelize = require('../../config/database');
+const Watch = require('../models/Watch');
+const Bracelet = require('../models/Bracelet');
 
 const tableName = 'bracelets_watches';
 
 const BraceletWatch = sequelize.define('BraceletWatch', {
-  watch_id: {
+  watchID: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     allowNull: false,
@@ -15,7 +17,7 @@ const BraceletWatch = sequelize.define('BraceletWatch', {
       key: 'id',
     },
   },
-  bracelet_id: {
+  braceletID: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     allowNull: false,
@@ -27,12 +29,12 @@ const BraceletWatch = sequelize.define('BraceletWatch', {
   createdAt: {
     type: 'TIMESTAMP',
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    allowNull: false,
+    allowNull: true,
   },
   updatedAt: {
     type: 'TIMESTAMP',
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    allowNull: false,
+    allowNull: true,
   },
 }, { tableName });
 
@@ -41,4 +43,22 @@ BraceletWatch.prototype.toJSON = function () {
   return Object.assign({}, this.get());
 };
 
+
+Bracelet.belongsToMany(Watch, {
+  constraints: false,
+  through: {
+    model: BraceletWatch,
+    unique: false,
+  },
+  foreignKey: 'braceletID',
+});
+Watch.belongsToMany(Bracelet, {
+  constraints: false,
+  as: 'bracelets',
+  through: {
+    model: BraceletWatch,
+    unique: false,
+  },
+  foreignKey: 'watchID',
+});
 module.exports = BraceletWatch;

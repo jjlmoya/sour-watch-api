@@ -41,6 +41,7 @@ const WatchController = () => {
         include: [
           'images',
           'bracelets',
+          'properties',
         ],
       });
       return res.status(200).json({ watches });

@@ -1,18 +1,20 @@
-const WatchProperty = require('../models/WatchProperty');
+const Collection = require('../models/Collection');
 const authService = require('../services/auth.service');
 
-const WatchPropertyController = () => {
+const CollectionController = () => {
   const create = async (req, res) => {
     const { body } = req;
     try {
-      const watchProperty = await WatchProperty.create({
-        watch_id: body.watch_id,
-        property_id: body.property_id,
-        value: body.value,
+      const collection = await Collection.create({
+        name: body.name,
+        slug: body.slug,
+        weight: body.weight,
+        image: body.image,
+        description: body.description,
+        banDiscount: body.banDiscount,
       });
-      const token = authService().issue({ id: watchProperty.id });
-
-      return res.status(200).json({ token, watchProperty });
+      const token = authService().issue({ name: collection.id });
+      return res.status(200).json({ token, collection });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
@@ -33,11 +35,14 @@ const WatchPropertyController = () => {
 
   const read = async (req, res) => {
     try {
-      const watchesProperties = await WatchProperty.findAll();
-      return res.status(200).json({ watchesProperties });
+      const collection = await Collection.findAll();
+      return res.status(200).json({ collection });
     } catch (err) {
       console.log(err);
-      return res.status(500).json({ msg: 'Internal server error' });
+      return res.status(500).json({
+        msg: 'Internal server error',
+        error: err,
+      });
     }
   };
 
@@ -49,4 +54,4 @@ const WatchPropertyController = () => {
   };
 };
 
-module.exports = WatchPropertyController;
+module.exports = CollectionController;

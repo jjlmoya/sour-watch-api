@@ -2,8 +2,6 @@
 const Sequelize = require('sequelize');
 
 const sequelize = require('../../config/database');
-const Watch = require('../models/Watch');
-const Bracelet = require('../models/Bracelet');
 
 const tableName = 'bracelets_watches';
 

@@ -24,8 +24,24 @@ Watch.belongsToMany(Bracelet, {
   },
   foreignKey: 'watchID',
 });
-module.exports = BraceletWatch;
 
+Property.belongsToMany(Watch, {
+  constraints: false,
+  through: {
+    model: WatchProperty,
+    unique: false,
+  },
+  foreignKey: 'propertyID',
+});
+Watch.belongsToMany(Property, {
+  constraints: false,
+  as: 'properties',
+  through: {
+    model: WatchProperty,
+    unique: false,
+  },
+  foreignKey: 'watchID',
+});
 
 module.exports = {
   Bracelet,

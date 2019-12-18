@@ -44,21 +44,5 @@ const WatchProperty = sequelize.define('WatchProperty', {
 WatchProperty.prototype.toJSON = function () {
   return Object.assign({}, this.get());
 };
-Property.belongsToMany(Watch, {
-  constraints: false,
-  through: {
-    model: WatchProperty,
-    unique: false,
-  },
-  foreignKey: 'propertyID',
-});
-Watch.belongsToMany(Property, {
-  constraints: false,
-  as: 'properties',
-  through: {
-    model: WatchProperty,
-    unique: false,
-  },
-  foreignKey: 'watchID',
-});
+
 module.exports = WatchProperty;

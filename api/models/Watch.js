@@ -33,7 +33,7 @@ const Watch = sequelize.define('Watch', {
     type: Sequelize.INTEGER,
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   createdAt: {
     type: 'TIMESTAMP',
@@ -75,6 +75,9 @@ const Watch = sequelize.define('Watch', {
   glass: {
     type: Sequelize.STRING,
   },
+  special: {
+    type: Sequelize.BOOLEAN,
+  },
 }, { tableName });
 
 // eslint-disable-next-line
@@ -83,3 +86,6 @@ Watch.prototype.toJSON = function () {
 };
 Watch.hasMany(Image, { as: 'images', foreignKey: 'watchID' });
 module.exports = Watch;
+
+// TODO 1-N Table PromoCodes 1 Watch 1 Discount <-----> 1 Discount N Watches
+// TODO 1-N Table Collection 1 Watch 1 Collection <-----> 1 Collection N Watches

@@ -24,6 +24,16 @@ const Collection = sequelize.define('Collection', {
   banDiscount: {
     type: Sequelize.BOOLEAN,
   },
+  createdAt: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false,
+  },
+  updatedAt: {
+    type: 'TIMESTAMP',
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    allowNull: false,
+  },
 }, { tableName });
 
 // eslint-disable-next-line

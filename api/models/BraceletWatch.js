@@ -42,23 +42,5 @@ const BraceletWatch = sequelize.define('BraceletWatch', {
 BraceletWatch.prototype.toJSON = function () {
   return Object.assign({}, this.get());
 };
-
-
-Bracelet.belongsToMany(Watch, {
-  constraints: false,
-  through: {
-    model: BraceletWatch,
-    unique: false,
-  },
-  foreignKey: 'braceletID',
-});
-Watch.belongsToMany(Bracelet, {
-  constraints: false,
-  as: 'bracelets',
-  through: {
-    model: BraceletWatch,
-    unique: false,
-  },
-  foreignKey: 'watchID',
-});
 module.exports = BraceletWatch;
+

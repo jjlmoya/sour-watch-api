@@ -1,6 +1,5 @@
 const Collection = require('../models/Collection');
 const authService = require('../services/auth.service');
-const Image = require('../models/Image');
 const Watch = require('../models/Watch');
 
 const CollectionController = () => {

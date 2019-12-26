@@ -43,6 +43,9 @@ Watch.belongsToMany(Property, {
   foreignKey: 'watchID',
 });
 
+Watch.hasMany(Image, { as: 'images', foreignKey: 'watchID' });
+Collection.hasMany(Watch, { as: 'watches', foreignKey: 'collectionSlug' });
+
 module.exports = {
   Bracelet,
   Collection,

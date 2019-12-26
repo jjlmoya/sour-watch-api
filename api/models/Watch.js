@@ -14,6 +14,14 @@ const Watch = sequelize.define('Watch', {
   collection: {
     type: Sequelize.STRING,
   },
+  collectionSlug: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    references: {
+      model: 'collections',
+      key: 'slug',
+    },
+  },
   brand: {
     type: Sequelize.STRING,
   },
@@ -84,7 +92,7 @@ const Watch = sequelize.define('Watch', {
 Watch.prototype.toJSON = function () {
   return Object.assign({}, this.get());
 };
-Watch.hasMany(Image, { as: 'images', foreignKey: 'watchID' });
+
 module.exports = Watch;
 
 // TODO 1-N Table PromoCodes 1 Watch 1 Discount <-----> 1 Discount N Watches

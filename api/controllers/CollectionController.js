@@ -35,7 +35,11 @@ const CollectionController = () => {
 
   const read = async (req, res) => {
     try {
-      const collection = await Collection.findAll();
+      const collection = await Collection.findAll({
+        include: [
+          'watches',
+        ],
+      });
       return res.status(200).json({ collection });
     } catch (err) {
       console.log(err);

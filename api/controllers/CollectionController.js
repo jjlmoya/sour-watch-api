@@ -1,5 +1,7 @@
 const Collection = require('../models/Collection');
 const authService = require('../services/auth.service');
+const Image = require('../models/Image');
+const Watch = require('../models/Watch');
 
 const CollectionController = () => {
   const create = async (req, res) => {
@@ -37,7 +39,11 @@ const CollectionController = () => {
     try {
       const collection = await Collection.findAll({
         include: [
-          'watches',
+          {
+            model: Watch,
+            as: 'watches',
+            include: ['images'],
+          },
         ],
       });
       return res.status(200).json({ collection });

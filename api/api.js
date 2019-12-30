@@ -15,6 +15,9 @@ const config = require('../config/');
 const dbService = require('./services/db.service');
 const auth = require('./policies/auth.policy');
 const models = require('./models');
+
+models.init();
+
 // environment: development, staging, testing, production
 const environment = process.env.NODE_ENV;
 

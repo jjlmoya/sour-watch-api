@@ -54,5 +54,8 @@ module.exports = {
   Watch,
   WatchProperty,
   BraceletWatch,
+  init: () => {
+    console.info('DB Linked');
+  },
 };
 

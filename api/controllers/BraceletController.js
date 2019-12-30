@@ -16,7 +16,6 @@ const BraceletController = () => {
 
       return res.status(200).json({ token, bracelet });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -38,7 +37,6 @@ const BraceletController = () => {
       const bracelets = await Bracelet.findAll();
       return res.status(200).json({ bracelets });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };

@@ -11,7 +11,6 @@ const PropertyController = () => {
       const token = authService().issue({ id: property.id });
       return res.status(200).json({ token, property });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };

@@ -17,7 +17,6 @@ const CollectionController = () => {
       const token = authService().issue({ name: collection.id });
       return res.status(200).json({ token, collection });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({ msg: 'Internal server error' });
     }
   };
@@ -47,7 +46,6 @@ const CollectionController = () => {
       });
       return res.status(200).json({ collection });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({
         msg: 'Internal server error',
         error: err,

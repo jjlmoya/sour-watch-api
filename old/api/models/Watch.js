@@ -89,7 +89,7 @@ const Watch = sequelize.define('Watch', {
 
 // eslint-disable-next-line
 Watch.prototype.toJSON = function () {
-  return Object.assign({}, this.get());
+  return { ...this.get() };
 };
 
 module.exports = Watch;

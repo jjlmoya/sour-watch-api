@@ -1,56 +1,25 @@
-const Sequelize = require('sequelize');
-const path = require('path');
+require('dotenv').config()
 
-const connection = require('./connection');
-
-let database;
-
-switch (process.env.NODE_ENV) {
-  case 'production':
-    database = new Sequelize(
-      connection.production.database,
-      connection.production.username,
-      connection.production.password, {
-        host: connection.production.host,
-        dialect: connection.production.dialect,
-        pool: {
-          max: 5,
-          min: 0,
-          idle: 10000,
-        },
-      },
-    );
-    break;
-  case 'testing':
-    database = new Sequelize(
-      connection.testing.database,
-      connection.testing.username,
-      connection.testing.password, {
-        host: connection.testing.host,
-        dialect: connection.testing.dialect,
-        pool: {
-          max: 5,
-          min: 0,
-          idle: 10000,
-        },
-      },
-    );
-    break;
-  default:
-    database = new Sequelize(
-      connection.development.database,
-      connection.development.username,
-      connection.development.password, {
-        host: connection.development.host,
-        dialect: connection.development.dialect,
-        pool: {
-          max: 5,
-          min: 0,
-          idle: 10000,
-        },
-        storage: path.join(process.cwd(), 'db', 'database.sqlite'),
-      },
-    );
+module.exports = {
+    development: {
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        host: '127.0.0.1',
+        dialect: 'mysql'
+    },
+    test: {
+        username: 'root',
+        password: null,
+        database: 'database_test',
+        host: '127.0.0.1',
+        dialect: 'mysql'
+    },
+    production: {
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        host: process.env.DB_HOST,
+        dialect: process.env.DB_DIALECT
+    }
 }
-
-module.exports = database;

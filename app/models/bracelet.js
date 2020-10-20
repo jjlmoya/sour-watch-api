@@ -1,0 +1,24 @@
+'use strict'
+const {
+    Model
+} = require('sequelize')
+module.exports = (sequelize, DataTypes) => {
+    class Bracelet extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+        static associate ({ Watch, Bracelet, BraceletsWatch }) {
+            Watch.belongsToMany(Bracelet, { as: 'watchesB', foreignKey: 'braceletsId', through: BraceletsWatch })
+        }
+    };
+    Bracelet.init({
+        name: DataTypes.STRING
+    }, {
+        sequelize,
+        timestamps: false,
+        modelName: 'Bracelet'
+    })
+    return Bracelet
+}
